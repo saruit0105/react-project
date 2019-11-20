@@ -8,7 +8,16 @@ const links = [
     path: "/content/random",
     className: "randomRecipes"
   },
-  { label: "Search for a recipe", path: "/content/search", className: "Search" }
+  {
+    label: "Search for a recipe",
+    path: "/content/search",
+    className: "Search"
+  },
+  {
+    label: "Lots of Recipes",
+    path: "/content/morerandoms",
+    className: "lotsOfRandoms"
+  }
 ];
 
 const Home = () =>

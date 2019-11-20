@@ -2,9 +2,12 @@
   "name": "src",
   "version": "0.1.0",
   "private": true,
+  "home": "https://saruit0105.github.io/react-project",
   "dependencies": {
     "@babel/runtime": "^7.7.2",
     "axios": "^0.19.0",
+    "gh-pages": "^2.1.1",
+    "github-pages": "^3.0.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
@@ -14,6 +17,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { RandomRecipe } from ".";
+import { RandomRecipe, MoreRandoms } from ".";
 
 const Content = ({ history }) => {
   const handleHomeClick = () => history.push("/");
@@ -8,6 +8,7 @@ const Content = ({ history }) => {
     <div className="mainContent">
       <button onClick={handleHomeClick}> Go Back</button>
       <Route path="/content/random" component={RandomRecipe} />
+      <Route path="/content/moreRandoms" component={MoreRandoms} />
     </div>
   );
 };
