@@ -11,3 +11,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.frontLists {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.frontLists ul {
+  width: 5vw;
+  margin-top: -15px;
+  margin-left: -40px;
+}
+
+.randomRecipeCard {
+  width: 25vw;
+  height: 40vw;
+  margin-left: 30vw;
+  margin-top: 20vh;
+  background-color: gray;
+}
+
+.randomRecipeCard img {
+  width: 18vw;
+  margin-top: 5px;
+  margin-left: 30px;
+}
+
+body {
+  background-color: black;
+}
