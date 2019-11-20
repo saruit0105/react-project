@@ -13,9 +13,9 @@ const links = [
 
 const Home = () =>
   links.map(link => (
-    <div className={`${link.className}`}>
+    <button className={`${link.className} homeLink`}>
       <Link to={link.path}>{link.label}</Link>
-    </div>
+    </button>
   ));
 
 export default Home;

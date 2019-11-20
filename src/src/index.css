@@ -39,4 +39,18 @@ code {
 
 body {
   background-color: black;
+  background-image: url("./istockphoto-935971392-612x612.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.homeLink {
+  border: 1px solid black;
+  padding: 5px;
+  border-color: black;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
