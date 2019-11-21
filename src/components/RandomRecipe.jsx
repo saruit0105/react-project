@@ -10,6 +10,11 @@ class RandomRecipe extends Component {
     this.fetchRecipes();
   }
 
+  handleRecipeClick = id => () => {
+    const { history } = this.props;
+    history.push(`/content/singleRecipe/${id}`);
+  };
+
   fetchRecipes = async () => {
     try {
       const { data } = await axios.get(
@@ -54,7 +59,7 @@ class RandomRecipe extends Component {
             </div>
           )}
           <button>Not a fan</button>
-          <button>Save this!</button>
+          <button>More details!</button>
         </div>
       </div>
     );

@@ -22,6 +22,15 @@ class MoreRandoms extends Component {
     }
   };
 
+  handleRecipeClick = id => () => {
+    const { history } = this.props;
+    console.log(id);
+    // localStorage.setItem("myID", id);
+    // var storedId = localStorage.getItem("foodID");
+    // console.log(storedId);
+    history.push(`/content/singleRecipe/${id}`);
+  };
+
   render() {
     const { randomRecipeArr } = this.state;
     return (
@@ -54,7 +63,9 @@ class MoreRandoms extends Component {
                 </div>
               </div>
               <button>Not a fan</button>
-              <button>Save this!</button>
+              <button onClick={this.handleRecipeClick(eachRecipe.id)}>
+                Show details!
+              </button>
             </div>
           ))}
       </div>
