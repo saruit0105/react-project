@@ -3,7 +3,8 @@ import axios from "axios";
 
 class MoreRandoms extends Component {
   state = {
-    randomRecipeArr: null
+    randomRecipeArr: null,
+    selectedRecipe: []
   };
 
   componentDidMount() {
@@ -29,6 +30,25 @@ class MoreRandoms extends Component {
     // var storedId = localStorage.getItem("foodID");
     // console.log(storedId);
     history.push(`/content/singleRecipe/${id}`);
+  };
+
+  handleDeleteClick = id => () => {
+    axios
+      .get(
+        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_SPOON}`
+      )
+      .then(newItem => {
+        let clonedArr = [...this.state.randomRecipeArr.recipes].concat(
+          newItem.data.recipes
+        );
+        clonedArr.splice(id, 1);
+        console.log(clonedArr, newItem.data);
+        this.setState({
+          randomRecipeArr: { recipes: clonedArr }
+        });
+        console.log(newItem);
+      });
+    // const newClonedArr = [...clonedArr.recipes, newItem.recipes];
   };
 
   render() {
@@ -62,7 +82,9 @@ class MoreRandoms extends Component {
                   </ul>
                 </div>
               </div>
-              <button>Not a fan</button>
+              <button onClick={this.handleDeleteClick(eachRecipe)}>
+                Not a fan
+              </button>
               <button onClick={this.handleRecipeClick(eachRecipe.id)}>
                 Show details!
               </button>

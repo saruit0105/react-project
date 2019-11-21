@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import MoreRandoms from "./MoreRandoms";
 
 class SingleRecipe extends Component {
   state = { theRecipe: null };
@@ -29,33 +28,44 @@ class SingleRecipe extends Component {
     const { theRecipe } = this.state;
 
     if (theRecipe !== null) {
-      // console.log(theRecipe)
-      let copy = theRecipe.steps.map(
-        eachRecipe => console.log(eachRecipe)
-        // return {
-        // <div>
-        //   <p>{eachRecipe.step}</p>
-        // </div>
-        // }
-      );
+      console.log(theRecipe.steps);
+      let copy = theRecipe.steps.map(eachRecipe => (
+        <div>
+          <p>{eachRecipe.step}</p>
+        </div>
+      ));
       return copy;
     }
   };
 
-  // ingredientDetails = () => {
-  //   console.log("running the details function");
-  //   const { theRecipe } = this.state;
+  ingredientDetails = () => {
+    console.log("running the details function");
+    const { theRecipe } = this.state;
 
-  //   if (theRecipe !== null) {
-  //     let ingredients = theRecipes.steps.
-  //   }
-  // }
+    if (theRecipe !== null) {
+      console.log(theRecipe.steps);
+      let ingredientCopy = theRecipe.steps.map(
+        eachRecipe => (eachRecipe = eachRecipe.ingredients)
+      );
+      ingredientCopy = ingredientCopy.flat(Infinity);
+      return ingredientCopy.map(ingredient => (
+        <ul>
+          <li>{ingredient.name}</li>
+        </ul>
+      ));
+    }
+  };
 
   render() {
     // const { theRecipe } = this.state;
     this.recipeDetails();
     console.log("this is the single recipe page");
-    return <div>{this.recipeDetails()}</div>;
+    return (
+      <div>
+        {this.recipeDetails()}
+        {this.ingredientDetails()}
+      </div>
+    );
   }
 }
 
