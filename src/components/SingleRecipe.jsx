@@ -29,7 +29,7 @@ class SingleRecipe extends Component {
 
     if (theRecipe !== null) {
       console.log(theRecipe.steps);
-      let copy = theRecipe.steps.map(eachRecipe => (
+      const copy = theRecipe.steps.map(eachRecipe => (
         <div>
           <p>{eachRecipe.step}</p>
         </div>
@@ -37,6 +37,14 @@ class SingleRecipe extends Component {
       return copy;
     }
   };
+
+  handleGoBack = () =>
+    this.props.history.push({
+      pathname: "/content/morerandoms",
+      state: {
+        from: this.props.location.pathname
+      }
+    });
 
   ingredientDetails = () => {
     console.log("running the details function");
@@ -56,14 +64,27 @@ class SingleRecipe extends Component {
     }
   };
 
+  handleClick = e => {
+    this.saveRecipe();
+    console.log("im being clicked!");
+  };
+
+  saveRecipe = () => {
+    axios.post("https://ironrest.herokuapp.com/saruit", this.state);
+  };
+
   render() {
     // const { theRecipe } = this.state;
     this.recipeDetails();
     console.log("this is the single recipe page");
     return (
-      <div>
+      <div className="listItems">
+        <button onClick={this.handleGoBack}> Back to my recipes</button>
+        <h1>Directions :</h1>
         {this.recipeDetails()}
+        <h2>Ingredients</h2>
         {this.ingredientDetails()}
+        <span></span>
       </div>
     );
   }

@@ -8,7 +8,16 @@ class MoreRandoms extends Component {
   };
 
   componentDidMount() {
-    this.randomRecipes();
+    console.log("mounted", this);
+    if (this.props.location.state) {
+      //We are coming from the details page
+      const data = JSON.parse(localStorage.getItem("randomRecipes"));
+      this.setState({ randomRecipeArr: data });
+    } else {
+      //We are coming from the homepage
+      localStorage.clear();
+      this.randomRecipes();
+    }
   }
 
   randomRecipes = async () => {
@@ -17,6 +26,7 @@ class MoreRandoms extends Component {
         `https://api.spoonacular.com/recipes/random?number=3&apiKey=${process.env.REACT_APP_SPOON}`
       );
       this.setState({ randomRecipeArr: data });
+      localStorage.setItem("randomRecipes", JSON.stringify(data));
       console.log(data.recipes);
     } catch (e) {
       console.log("Error fetching Recipes", e);
@@ -26,9 +36,6 @@ class MoreRandoms extends Component {
   handleRecipeClick = id => () => {
     const { history } = this.props;
     console.log(id);
-    // localStorage.setItem("myID", id);
-    // var storedId = localStorage.getItem("foodID");
-    // console.log(storedId);
     history.push(`/content/singleRecipe/${id}`);
   };
 
@@ -38,17 +45,26 @@ class MoreRandoms extends Component {
         `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_SPOON}`
       )
       .then(newItem => {
-        let clonedArr = [...this.state.randomRecipeArr.recipes].concat(
+        const clonedArr = [...this.state.randomRecipeArr.recipes].concat(
           newItem.data.recipes
         );
+        console.log(id);
         clonedArr.splice(id, 1);
         console.log(clonedArr, newItem.data);
         this.setState({
           randomRecipeArr: { recipes: clonedArr }
         });
-        console.log(newItem);
       });
     // const newClonedArr = [...clonedArr.recipes, newItem.recipes];
+  };
+
+  handleClick = eachRecipe => {
+    axios.post("https://ironrest.herokuapp.com/saruit", eachRecipe);
+    alert("Saved!");
+  };
+
+  saveRecipe = eachRecipe => {
+    axios.post("https://ironrest.herokuapp.com/saruit", eachRecipe);
   };
 
   render() {
@@ -87,6 +103,9 @@ class MoreRandoms extends Component {
               </button>
               <button onClick={this.handleRecipeClick(eachRecipe.id)}>
                 Show details!
+              </button>
+              <button onClick={e => this.handleClick(eachRecipe)}>
+                Save this!
               </button>
             </div>
           ))}

@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const links = [
-  { label: "My calendar", path: "/content/calendar", className: "calendar" },
+  { label: "My Week", path: "/content/week", className: "week" },
   {
-    label: "Random recipes",
+    label: "Random Recipes",
     path: "/content/random",
     className: "randomRecipes"
   },

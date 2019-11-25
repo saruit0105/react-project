@@ -1,13 +1,7 @@
 import "./App.css";
 import React from "react";
 import { Route } from "react-router-dom";
-import {
-  Home,
-  Content,
-  RandomRecipe,
-  MoreRandoms,
-  SingleRecipe
-} from "./components";
+import { Home, Content } from "./components";
 
 console.log(process.env);
 

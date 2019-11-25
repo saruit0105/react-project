@@ -12,7 +12,7 @@ class Search extends Component {
     console.log(search);
   };
   getSearchResults = () => {
-    let query = `https://api.spoonacular.com/recipes/search?query=${this.state.searchTerm}number=5&apiKey=${process.env.REACT_APP_SPOON}`;
+    const query = `https://api.spoonacular.com/recipes/search?query=${this.state.searchTerm}number=5&apiKey=${process.env.REACT_APP_SPOON}`;
     console.log(query);
     axios
       .get(
@@ -29,7 +29,7 @@ class Search extends Component {
   searchList = () => {
     const { searchResults } = this.state;
     if (searchResults !== null) {
-      console.log(searchResults.data.results);
+      console.log(searchResults.data);
       const list = searchResults.data.results.map(
         eachResults => (
           <div className="randomRecipeCard">
@@ -42,6 +42,7 @@ class Search extends Component {
             <ul>
               <li> {eachResults.title}</li>
             </ul>
+
             <button onClick={this.handleRecipeClick(eachResults.id)}>
               Show details!
             </button>
