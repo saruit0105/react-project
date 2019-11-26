@@ -7,7 +7,7 @@ const Content = ({ history }) => {
 
   return (
     <div className="mainContent">
-      <button onClick={handleHomeClick} className="homeButton">
+      <button onClick={handleHomeClick} className="homeButton btn btn-success">
         Go Back
       </button>
       <Switch>

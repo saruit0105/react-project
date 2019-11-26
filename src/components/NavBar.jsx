@@ -4,7 +4,7 @@ import { UserContext } from '../context/UserContext';
 const NavBar = () => {
   const context = useContext(UserContext);
   const { user, signOut } = context;
-  console.log(user);
+
   return (
     <nav className="navbar navbar-light mainNav">
       <button onClick={signOut} className="btn btn-danger">

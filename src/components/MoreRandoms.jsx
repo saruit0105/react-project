@@ -51,15 +51,13 @@ class MoreRandoms extends Component {
     alert('Saved!');
   };
 
-  saveRecipe = eachRecipe => axios.post('https://ironrest.herokuapp.com/saruit', eachRecipe);
-
   render() {
     const { randomRecipes } = this.state;
 
     return (
-      <div>
+      <div className="recipeCards">
         {randomRecipes.map(eachRecipe => (
-          <div key={eachRecipe.id} className="randomRecipeCard">
+          <div key={eachRecipe.id} className="card">
             <div>
               <img src={eachRecipe.image} alt="food pics" />
               <p>
@@ -84,9 +82,25 @@ class MoreRandoms extends Component {
                 </ul>
               </div>
             </div>
-            <button onClick={this.handleDeleteClick(eachRecipe.id)}>Not a fan</button>
-            <button onClick={this.handleRecipeClick(eachRecipe.id)}>Show details!</button>
-            <button onClick={this.handleSaveRecipe(eachRecipe)}>Save this!</button>
+            <div class="card-stats">
+              <div class="stat">
+                <div class="value">
+                  <button className="cardButtons" onClick={this.handleDeleteClick(eachRecipe.id)}>
+                    Not a fan
+                  </button>
+                </div>
+              </div>
+              <div class="stat border">
+                <button className="cardButtons" onClick={this.handleRecipeClick(eachRecipe.id)}>
+                  Show details!
+                </button>
+              </div>
+              <div class="stat">
+                <button className="cardButtons" onClick={this.handleSaveRecipe(eachRecipe)}>
+                  Save this!
+                </button>
+              </div>
+            </div>
           </div>
         ))}
       </div>

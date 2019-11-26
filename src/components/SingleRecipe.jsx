@@ -42,7 +42,9 @@ class SingleRecipe extends Component {
     const { steps, ingredients } = this.state;
     return (
       <div className="listItems">
-        <button onClick={this.handleGoBack}> Back to my recipes</button>
+        <button onClick={this.handleGoBack} className="btn btn-warning">
+          Back to my recipes
+        </button>
         <h1>Directions :</h1>
         {steps.map(step => (
           <div key={step}>

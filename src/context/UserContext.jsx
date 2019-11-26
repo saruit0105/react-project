@@ -15,6 +15,7 @@ export const UserContextProvider = ({ children }) => {
   const signOut = () => {
     setUser(null);
     sessionStorage.removeItem('CURRENT_USER');
+    localStorage.clear();
   };
 
   const value = { user, signIn, signOut };

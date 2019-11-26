@@ -18,10 +18,8 @@ class MyWeek extends Component {
     try {
       const { data } = await axios.get('https://ironrest.herokuapp.com/saruit');
       this.setState({ savedRecipe: data });
-      let { mappedRecipes } = this.state;
-      mappedRecipes = parseStringifiedJSON(localStorage.getItem('WEEKLY_RECIPE'), []);
-      console.log(mappedRecipes);
-      return this.setState({ mappedRecipes });
+      let newItems = parseStringifiedJSON(localStorage.getItem('WEEKLY_RECIPE'), []);
+      return this.setState({ mappedRecipes: newItems });
     } catch (e) {
       console.log('Error fetching Recipes', e);
     }
@@ -34,7 +32,15 @@ class MyWeek extends Component {
     const isDuplicate = currentRecipesForSelectedDay.some(recipe => recipe === recipeTitle);
     !isDuplicate && currentRecipesForSelectedDay.push(recipeTitle);
     this.setState({ mappedRecipes: { ...mappedRecipes, [selectedDay]: currentRecipesForSelectedDay } });
-    localStorage.setItem('WEEKLY_RECIPE', JSON.stringify(recipeTitle));
+
+    let newItems = {};
+    if (localStorage.getItem('WEEKLY_RECIPE')) {
+      newItems = JSON.parse(localStorage.getItem('WEEKLY_RECIPE'));
+    }
+
+    newItems[selectedDay] ? newItems[selectedDay].push(recipeTitle) : (newItems[selectedDay] = [recipeTitle]);
+
+    localStorage.setItem('WEEKLY_RECIPE', JSON.stringify(newItems));
   };
 
   handleRecipeClick = id => () => {
@@ -44,6 +50,7 @@ class MyWeek extends Component {
 
   render() {
     const { savedRecipe, mappedRecipes } = this.state;
+
     return (
       <div className="week">
         <ul>
@@ -58,11 +65,11 @@ class MyWeek extends Component {
             </div>
           ))}
         </ul>
-        <container className="listItems">
+        <container className="listItems weeklyList">
           <ul className="list-group">
             <h1> Saved Recipes</h1>
             {(savedRecipe || []).map(eachSaved => (
-              <li key={eachSaved.id} className="list-group-item">
+              <li key={eachSaved.id} className="list-group-item weekgroup">
                 <img src={eachSaved.image} alt="" />
                 {eachSaved.title}
                 <select onChange={this.handleSelectDayForRecipe(eachSaved.title)}>

@@ -15,7 +15,7 @@ const AuthContainer = ({ children }) => {
   if (user) return children;
 
   return (
-    <div>
+    <div className="auth">
       <h2>Log in or Sign up!</h2>
       <button onClick={authenticate} className="btn btn-primary">
         Login

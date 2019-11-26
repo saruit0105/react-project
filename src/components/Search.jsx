@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
 class Search extends Component {
   state = {
     searchTerm: '',
@@ -25,23 +24,36 @@ class Search extends Component {
     const { history } = this.props;
     history.push(`/content/singleRecipe/${id}`);
   };
+  handleSaveRecipe = recipe => async () => {
+    await axios.post('https://ironrest.herokuapp.com/saruit', recipe);
+
+    alert('Saved!');
+  };
 
   render() {
     const { searchResults } = this.state;
     return (
       <div>
-        <form onSubmit={this.getSearchResults}>
-          <input type="text" onChange={this.handleSearch} />
+        <form className="form-inline" onSubmit={this.getSearchResults}>
+          <i className="fas fa-search" aria-hidden="true"></i>
+          <input
+            className="form-control form-control-sm ml-3 w-75"
+            type="text"
+            placeholder="Search"
+            aria-label="Search"
+            onChange={this.handleSearch}
+          />
         </form>
-        {searchResults.map(({ image, title, id }) => (
-          <div key={id} className="randomRecipeCard">
+        {searchResults.map(eachResult => (
+          <div key={eachResult.id} className="randomRecipeCard">
             <div>
-              <img src={`https://spoonacular.com/recipeImages/${image}`} alt="food pic" />
+              <img src={`https://spoonacular.com/recipeImages/${eachResult.image}`} alt="food pic" />
             </div>
             <ul>
-              <li> {title}</li>
+              <li> {eachResult.title}</li>
             </ul>
-            <button onClick={this.handleRecipeClick(id)}>Show details!</button>
+            <button onClick={this.handleRecipeClick(eachResult.id)}>Show details!</button>
+            <button onClick={this.handleSaveRecipe(eachResult)}>Save this!</button>
           </div>
         ))}
       </div>

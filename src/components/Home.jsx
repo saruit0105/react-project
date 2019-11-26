@@ -4,11 +4,7 @@ import { UserContext } from '../context/UserContext';
 
 const links = [
   { label: 'My Week', path: '/content/week', className: 'week' },
-  {
-    label: 'Random Recipes',
-    path: '/content/random',
-    className: 'randomRecipes',
-  },
+
   {
     label: 'Search for a recipe',
     path: '/content/search',
@@ -26,14 +22,16 @@ const Home = () => {
   const { user } = context;
   return (
     <div>
-      {links.map(({ className, path, label }) => (
-        <button key={path} className={`${className} homeLink`}>
-          <Link to={path}>{label}</Link>
-        </button>
-      ))}
       <h1>
         Welcome {user.name.first} {user.name.last}
       </h1>
+      <div className="homescreen">
+        {links.map(({ className, path, label }) => (
+          <button key={path} className={`${className} homeLink`}>
+            <Link to={path}>{label}</Link>
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
