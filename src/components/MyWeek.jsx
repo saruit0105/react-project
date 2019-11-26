@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { parseStringifiedJSON } from '../helpers';
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -17,6 +18,10 @@ class MyWeek extends Component {
     try {
       const { data } = await axios.get('https://ironrest.herokuapp.com/saruit');
       this.setState({ savedRecipe: data });
+      let { mappedRecipes } = this.state;
+      mappedRecipes = parseStringifiedJSON(localStorage.getItem('WEEKLY_RECIPE'), []);
+      console.log(mappedRecipes);
+      return this.setState({ mappedRecipes });
     } catch (e) {
       console.log('Error fetching Recipes', e);
     }
@@ -29,6 +34,7 @@ class MyWeek extends Component {
     const isDuplicate = currentRecipesForSelectedDay.some(recipe => recipe === recipeTitle);
     !isDuplicate && currentRecipesForSelectedDay.push(recipeTitle);
     this.setState({ mappedRecipes: { ...mappedRecipes, [selectedDay]: currentRecipesForSelectedDay } });
+    localStorage.setItem('WEEKLY_RECIPE', JSON.stringify(recipeTitle));
   };
 
   handleRecipeClick = id => () => {

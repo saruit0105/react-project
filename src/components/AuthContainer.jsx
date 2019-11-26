@@ -16,8 +16,11 @@ const AuthContainer = ({ children }) => {
 
   return (
     <div>
-      <h2>Login</h2>
-      <button onClick={authenticate}>Click me</button>
+      <h2>Log in or Sign up!</h2>
+      <button onClick={authenticate} className="btn btn-primary">
+        Login
+      </button>
+      <button className="btn btn-info"> Sign up</button>
     </div>
   );
 };

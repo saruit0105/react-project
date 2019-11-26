@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 
 const links = [
   { label: 'My Week', path: '/content/week', className: 'week' },
@@ -20,11 +21,21 @@ const links = [
   },
 ];
 
-const Home = () =>
-  links.map(({ className, path, label }) => (
-    <button key={path} className={`${className} homeLink`}>
-      <Link to={path}>{label}</Link>
-    </button>
-  ));
+const Home = () => {
+  const context = useContext(UserContext);
+  const { user } = context;
+  return (
+    <div>
+      {links.map(({ className, path, label }) => (
+        <button key={path} className={`${className} homeLink`}>
+          <Link to={path}>{label}</Link>
+        </button>
+      ))}
+      <h1>
+        Welcome {user.name.first} {user.name.last}
+      </h1>
+    </div>
+  );
+};
 
 export default Home;

@@ -6,11 +6,14 @@ const NavBar = () => {
   const { user, signOut } = context;
   console.log(user);
   return (
-    <nav>
-      <button onClick={signOut}> Sign out</button>
-      <h1>
+    <nav className="navbar navbar-light mainNav">
+      <button onClick={signOut} className="btn btn-danger">
+        Sign out
+      </button>
+
+      <h1 style={{ fontSize: '15px' }}>
         <img src={user.picture.thumbnail} alt="" />
-        {user.name.first} {user.name.last}
+        {user.email}
       </h1>
     </nav>
   );

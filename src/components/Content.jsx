@@ -7,7 +7,9 @@ const Content = ({ history }) => {
 
   return (
     <div className="mainContent">
-      <button onClick={handleHomeClick}> Go Back</button>
+      <button onClick={handleHomeClick} className="homeButton">
+        Go Back
+      </button>
       <Switch>
         <Route path="/content/random" component={RandomRecipe} />
         <Route path="/content/week" component={MyWeek} />
