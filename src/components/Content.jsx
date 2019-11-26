@@ -1,17 +1,9 @@
-import { Switch, Route } from "react-router-dom";
-import { RandomRecipe, MoreRandoms, SingleRecipe, Search, MyWeek } from ".";
-import React from "react";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { RandomRecipe, MoreRandoms, SingleRecipe, Search, MyWeek } from '.';
 
-const Content = ({ history, location }) => {
-  const handleHomeClick = () => history.push("/");
-  //const handleHomeClick = () => history.goBack();
-  // const handleHomeClick = () =>
-  //   history.push({
-  //     pathname: "/content/morerandoms",
-  //     state: {
-  //       from: location.pathname
-  //     }
-  //   });
+const Content = ({ history }) => {
+  const handleHomeClick = () => history.push('/');
 
   return (
     <div className="mainContent">

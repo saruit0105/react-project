@@ -1,24 +1,12 @@
-import React, { Component } from "react";
-import axios from "axios";
-const days = [
-  { day: "Monday" },
-  { day: "Tuesday" },
-  { day: "Wednesday" },
-  { day: "Thursday" },
-  { day: "Friday" },
-  { day: "Saturday" },
-  { day: "Sunday" }
-];
+import React, { Component } from 'react';
+import axios from 'axios';
+
+const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
 class MyWeek extends Component {
   state = {
-    Monday: [],
-    Tuesday: [],
-    Wednesday: [],
-    Thursday: [],
-    Friday: [],
-    Saturday: [],
-    Sunday: [],
-    savedRecipe: null
+    savedRecipe: null,
+    mappedRecipes: {},
   };
 
   componentDidMount() {
@@ -27,65 +15,61 @@ class MyWeek extends Component {
 
   fetchSavedRecipes = async () => {
     try {
-      const { data } = await axios.get("https://ironrest.herokuapp.com/saruit");
+      const { data } = await axios.get('https://ironrest.herokuapp.com/saruit');
       this.setState({ savedRecipe: data });
-      console.log(data);
     } catch (e) {
-      console.log("Error fetching Recipes", e);
+      console.log('Error fetching Recipes', e);
     }
   };
 
-  daySelected = (event, title) => {
-    if (event.target.value !== "") {
-      console.log(event.target.value);
-      const updatedDay = [...this.state[event.target.value]];
-      updatedDay.push(
-        this.state.savedRecipe.filter(recipe => recipe.title === title)
-      );
-      console.log(updatedDay[0][0].title);
-      this.setState({
-        [event.target.value]: updatedDay[0][0].title
-      });
-    } else return;
+  handleSelectDayForRecipe = recipeTitle => e => {
+    const selectedDay = e.target.value;
+    const { mappedRecipes } = this.state;
+    const currentRecipesForSelectedDay = mappedRecipes[selectedDay] || [];
+    const isDuplicate = currentRecipesForSelectedDay.some(recipe => recipe === recipeTitle);
+    !isDuplicate && currentRecipesForSelectedDay.push(recipeTitle);
+    this.setState({ mappedRecipes: { ...mappedRecipes, [selectedDay]: currentRecipesForSelectedDay } });
   };
 
   handleRecipeClick = id => () => {
     const { history } = this.props;
-    console.log(id);
     history.push(`/content/singleRecipe/${id}`);
   };
 
   render() {
-    const { savedRecipe, Monday } = this.state;
+    const { savedRecipe, mappedRecipes } = this.state;
     return (
       <div className="week">
         <ul>
           {days.map(eachDay => (
-            <div>
-              <h1>{eachDay.day}</h1>
-              <li>{Monday}</li>
+            <div key={eachDay}>
+              <h1>{eachDay}</h1>
+              <ul>
+                {(mappedRecipes[eachDay] || []).map(recipe => (
+                  <li key={recipe}>{recipe}</li>
+                ))}
+              </ul>
             </div>
           ))}
         </ul>
         <container className="listItems">
           <ul className="list-group">
             <h1> Saved Recipes</h1>
-            {savedRecipe &&
-              savedRecipe.map(eachSaved => (
-                <li className="list-group-item">
-                  <img src={eachSaved.image} />
-                  {eachSaved.title}
-                  <select onChange={e => this.daySelected(e, eachSaved.title)}>
-                    <option value=""> </option>
-                    {days.map(eachDay => (
-                      <option value={eachDay.day}>{eachDay.day}</option>
-                    ))}
-                  </select>
-                  <button onClick={this.handleRecipeClick(eachSaved.id)}>
-                    Show details!
-                  </button>
-                </li>
-              ))}
+            {(savedRecipe || []).map(eachSaved => (
+              <li key={eachSaved.id} className="list-group-item">
+                <img src={eachSaved.image} alt="" />
+                {eachSaved.title}
+                <select onChange={this.handleSelectDayForRecipe(eachSaved.title)}>
+                  <option value=""> </option>
+                  {days.map(eachDay => (
+                    <option key={eachDay} value={eachDay}>
+                      {eachDay}
+                    </option>
+                  ))}
+                </select>
+                <button onClick={this.handleRecipeClick(eachSaved.id)}>Show details!</button>
+              </li>
+            ))}
           </ul>
         </container>
       </div>

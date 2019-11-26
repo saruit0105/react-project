@@ -1,89 +1,60 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import axios from 'axios';
 
 class SingleRecipe extends Component {
-  state = { theRecipe: null };
+  state = { steps: [], ingredients: [] };
 
   componentDidMount() {
-    console.log("this is the details page bro");
     this.fetchRecipes();
-    this.recipeDetails();
-    // this.testRequest();
   }
 
   fetchRecipes = async () => {
     try {
+      const { match } = this.props;
       const { data } = await axios.get(
-        `https://api.spoonacular.com/recipes/${this.props.match.params.id}/analyzedInstructions?apiKey=${process.env.REACT_APP_SPOON}`
+        `https://api.spoonacular.com/recipes/${match.params.id}/analyzedInstructions?apiKey=${process.env.REACT_APP_SPOON}`,
       );
-      this.setState({ theRecipe: data[0] });
-      console.log(data[0]);
+      const { steps, ingredients } = data[0].steps.reduce(
+        (acc, { step, ingredients }) => {
+          acc.steps.push(step);
+          const updatedIngredients = acc.ingredients.concat(ingredients);
+          return { ...acc, ingredients: updatedIngredients };
+        },
+        { steps: [], ingredients: [] },
+      );
+      this.setState({ steps, ingredients });
     } catch (e) {
-      console.log("Error fetching Recipes", e);
+      console.log('Error fetching Recipes', e);
     }
   };
 
-  recipeDetails = () => {
-    console.log("running the details function");
-    const { theRecipe } = this.state;
-
-    if (theRecipe !== null) {
-      console.log(theRecipe.steps);
-      const copy = theRecipe.steps.map(eachRecipe => (
-        <div>
-          <p>{eachRecipe.step}</p>
-        </div>
-      ));
-      return copy;
-    }
-  };
-
-  handleGoBack = () =>
-    this.props.history.push({
-      pathname: "/content/morerandoms",
-      state: {
-        from: this.props.location.pathname
-      }
+  handleGoBack = () => {
+    const { location, history } = this.props;
+    history.push({
+      pathname: '/content/morerandoms',
+      state: { from: location.pathname },
     });
-
-  ingredientDetails = () => {
-    console.log("running the details function");
-    const { theRecipe } = this.state;
-
-    if (theRecipe !== null) {
-      console.log(theRecipe.steps);
-      let ingredientCopy = theRecipe.steps.map(
-        eachRecipe => (eachRecipe = eachRecipe.ingredients)
-      );
-      ingredientCopy = ingredientCopy.flat(Infinity);
-      return ingredientCopy.map(ingredient => (
-        <ul>
-          <li>{ingredient.name}</li>
-        </ul>
-      ));
-    }
   };
 
-  handleClick = e => {
-    this.saveRecipe();
-    console.log("im being clicked!");
-  };
-
-  saveRecipe = () => {
-    axios.post("https://ironrest.herokuapp.com/saruit", this.state);
-  };
+  saveRecipe = () => axios.post('https://ironrest.herokuapp.com/saruit', this.state);
 
   render() {
-    // const { theRecipe } = this.state;
-    this.recipeDetails();
-    console.log("this is the single recipe page");
+    const { steps, ingredients } = this.state;
     return (
       <div className="listItems">
         <button onClick={this.handleGoBack}> Back to my recipes</button>
         <h1>Directions :</h1>
-        {this.recipeDetails()}
+        {steps.map(step => (
+          <div key={step}>
+            <p>{step}</p>
+          </div>
+        ))}
         <h2>Ingredients</h2>
-        {this.ingredientDetails()}
+        <ul>
+          {ingredients.map(({ name }) => (
+            <li key={name}>{name}</li>
+          ))}
+        </ul>
         <span></span>
       </div>
     );

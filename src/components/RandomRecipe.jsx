@@ -1,10 +1,8 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import axios from 'axios';
 
 class RandomRecipe extends Component {
-  state = {
-    singleRecipe: null
-  };
+  state = { singleRecipe: null };
 
   componentDidMount() {
     this.fetchRecipes();
@@ -18,12 +16,11 @@ class RandomRecipe extends Component {
   fetchRecipes = async () => {
     try {
       const { data } = await axios.get(
-        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_SPOON}`
+        `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_SPOON}`,
       );
-      this.setState({ singleRecipe: data });
-      console.log(data.recipes[0]);
+      this.setState({ singleRecipe: data.recipes[0] });
     } catch (e) {
-      console.log("Error fetching Recipes", e);
+      console.log('Error fetching Recipes', e);
     }
   };
 
@@ -34,25 +31,25 @@ class RandomRecipe extends Component {
         <div className="randomRecipeCard">
           {singleRecipe && (
             <div>
-              <img src={singleRecipe.recipes[0].image} alt="food pics" />
+              <img src={singleRecipe.image} alt="food pics" />
               <p>
-                <strong>{singleRecipe.recipes[0].title}</strong>
+                <strong>{singleRecipe.title}</strong>
               </p>
               <div className="frontLists">
                 <ul>
                   <p>
                     <strong>Dish type</strong>
                   </p>
-                  {singleRecipe.recipes[0].dishTypes.map(eachType => (
-                    <li>{eachType}</li>
+                  {singleRecipe.dishTypes.map(eachType => (
+                    <li key={eachType}>{eachType}</li>
                   ))}
                 </ul>
                 <ul>
                   <p>
                     <strong>Diet type</strong>
                   </p>
-                  {singleRecipe.recipes[0].diets.map(eachDiet => (
-                    <li>{eachDiet}</li>
+                  {singleRecipe.diets.map(eachDiet => (
+                    <li key={eachDiet}>{eachDiet}</li>
                   ))}
                 </ul>
               </div>
