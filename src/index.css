@@ -52,6 +52,8 @@ body {
   background-image: url('./Images/goodplate.png');
   background-size: cover;
   background-color: transparent;
+  object-fit: cover;
+  height: 360px;
 }
 
 .week {
