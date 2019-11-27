@@ -42,8 +42,7 @@ class SingleRecipe extends Component {
   render() {
     const { steps, ingredients } = this.state;
     return (
-      <div>
-        className="listItems recipeInstructions" >
+      <div className="listItems recipeInstructions">
         <button onClick={this.handleGoBack} className="btn btn-warning">
           Back to my recipes
         </button>
