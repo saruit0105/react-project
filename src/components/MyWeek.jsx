@@ -65,7 +65,7 @@ class MyWeek extends Component {
             </div>
           ))}
         </ul>
-        <container className="listItems weeklyList">
+        <container className=" weeklyList">
           <ul className="list-group">
             <h1> Saved Recipes</h1>
             {(savedRecipe || []).map(eachSaved => (

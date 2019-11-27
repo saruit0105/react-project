@@ -70,7 +70,8 @@ body {
 }
 
 * {
-  font-family: monospace;
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 25px;
 }
 
 .listItems {
@@ -79,6 +80,9 @@ body {
   width: 70vh;
   margin-left: 22vw;
   margin-top: 5vh;
+  background-color: black;
+  color: white;
+  opacity: 0.5;
 }
 
 .mainNav {
@@ -88,6 +92,9 @@ body {
 .homeButton {
   margin-top: 0px;
   margin-left: 30px;
+  position: absolute;
+  top: 13px;
+  right: 52vw;
 }
 
 .randoms {
@@ -114,6 +121,11 @@ body {
 
 .weeklyList {
   width: 700px;
+  height: 90vh;
+  overflow-y: scroll;
+  width: 70vh;
+  margin-left: 22vw;
+  margin-top: 5vh;
 }
 /* .weekgroup {
   border-radius: 25px;

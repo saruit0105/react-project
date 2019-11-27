@@ -44,6 +44,7 @@ class MoreRandoms extends Component {
     );
     const newRecipes = [...this.state.randomRecipes, ...data.recipes].filter(recipe => recipe.id !== id);
     this.setState({ randomRecipes: newRecipes });
+    localStorage.setItem('RANDOM_RECIPES', JSON.stringify(newRecipes));
   };
 
   handleSaveRecipe = recipe => async () => {
