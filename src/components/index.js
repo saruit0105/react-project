@@ -7,3 +7,4 @@ export { default as Search } from './Search';
 export { default as MyWeek } from './MyWeek';
 export { default as AuthContainer } from './AuthContainer';
 export { default as NavBar } from './NavBar';
+export { default as NotFound } from './NotFound';

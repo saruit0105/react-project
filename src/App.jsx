@@ -1,7 +1,7 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { UserContextProvider } from './context/UserContext';
-import { Home, Content, AuthContainer, NavBar } from './components';
+import { Home, Content, AuthContainer, NavBar, NotFound } from './components';
 import './App.css';
 
 const App = () => (
@@ -9,8 +9,11 @@ const App = () => (
     <div className="App">
       <AuthContainer>
         <NavBar />
-        <Route path="/" component={Home} exact />
-        <Route path="/content" component={Content} />
+        <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/content" component={Content} />
+          <Route component={NotFound} />
+        </Switch>
       </AuthContainer>
     </div>
   </UserContextProvider>
