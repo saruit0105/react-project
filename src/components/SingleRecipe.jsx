@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import '../SingleRecipe.css';
 
 class SingleRecipe extends Component {
   state = { steps: [], ingredients: [] };
@@ -41,20 +42,25 @@ class SingleRecipe extends Component {
   render() {
     const { steps, ingredients } = this.state;
     return (
-      <div className="listItems">
+      <div
+        // style={{ fontFamily: 'Shadows Into Light', fontSize: '25px' }}
+        className="listItems recipeInstructions"
+      >
         <button onClick={this.handleGoBack} className="btn btn-warning">
           Back to my recipes
         </button>
         <h1>Directions :</h1>
         {steps.map(step => (
           <div key={step}>
-            <p>{step}</p>
+            <p className="recipeInstructions">{step}</p>
           </div>
         ))}
         <h2>Ingredients</h2>
         <ul>
           {ingredients.map(({ name }) => (
-            <li key={name}>{name}</li>
+            <li key={name} className="recipeInstructions">
+              {name}
+            </li>
           ))}
         </ul>
         <span></span>
