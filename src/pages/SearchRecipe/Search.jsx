@@ -18,7 +18,6 @@ const Search = ({ history }) => {
       `https://api.spoonacular.com/recipes/search?query=${searchTerm}&number=5&apiKey=95859f3f50c14910a0397cbfcc0d6e9d`,
     );
     changeResults(data.results || []);
-    console.log(data.results);
   };
 
   const handleRecipeClick = (id) => () => {
@@ -59,5 +58,3 @@ const Search = ({ history }) => {
 };
 
 export default Search;
-
-// `https://api.spoonacular.com/recipes/search?query=${searchTerm}&number=5&apiKey=${process.env.REACT_APP_SPOON}`

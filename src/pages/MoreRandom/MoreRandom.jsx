@@ -20,7 +20,7 @@ const MoreRandom = ({ location, history }) => {
         'https://api.spoonacular.com/recipes/random?number=3&apiKey=95859f3f50c14910a0397cbfcc0d6e9d',
       );
       const { recipes } = data;
-      console.log('what is this data', recipes);
+
       changeRecipes(recipes);
       localStorage.setItem('RANDOM_RECIPES', JSON.stringify(recipes));
     } catch (e) {
@@ -50,7 +50,6 @@ const MoreRandom = ({ location, history }) => {
     alert('Saved!');
   };
 
-  console.log(randomRecipes);
   return (
     <div className="recipeCards">
       {randomRecipes.map((eachRecipe) => (
