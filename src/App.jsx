@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { UserContextProvider } from './context/UserContext';
-import {Content, AuthContainer, NavBar, NotFound } from './components';
-import {Home} from './pages'
+import { Content, AuthContainer, NavBar } from './components';
+import { Home, NotFound } from './pages';
 import './App.css';
 
 const App = () => (

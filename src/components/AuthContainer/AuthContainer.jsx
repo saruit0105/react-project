@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import axios from 'axios';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../../context/UserContext';
+import './AuthContainer.css';
 
 const AuthContainer = ({ children }) => {
   const context = useContext(UserContext);

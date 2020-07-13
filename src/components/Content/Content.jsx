@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { MoreRandom, DetailedRecipe, SearchRecipe, Weekly } from '../pages';
+import { MoreRandom, DetailedRecipe, SearchRecipe, Weekly } from '../../pages';
+import './Content.css';
 
 const Content = ({ history }) => {
   const handleHomeClick = () => history.push('/');
