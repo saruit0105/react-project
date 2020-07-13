@@ -1,0 +1,21 @@
+.homescreen {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 200px;
+  margin-left: 100px;
+}
+
+.homeLink {
+  padding: 5px;
+  border-style: none;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-image: url('../../Images//goodplate.png');
+  background-size: cover;
+  background-color: transparent;
+  object-fit: cover;
+  height: 360px;
+}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { parseStringifiedJSON } from '../../helpers';
+import './MoreRandom.css';
 
 const MoreRandom = ({ location, history }) => {
   const [randomRecipes, changeRecipes] = useState([]);

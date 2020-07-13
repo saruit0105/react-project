@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../../context/UserContext'
+import { UserContext } from '../../context/UserContext';
+import './Home.css';
 
 const links = [
   { label: 'My Week', path: '/content/week', className: 'week' },

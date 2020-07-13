@@ -1,0 +1,14 @@
+.randomRecipeCard {
+  width: 25vw;
+  height: 40vw;
+  margin-left: 35vw;
+  margin-top: 20vh;
+  background-color: beige;
+  overflow-y: scroll;
+}
+
+.randomRecipeCard img {
+  width: 18vw;
+  margin-top: 5px;
+  margin-left: 30px;
+}

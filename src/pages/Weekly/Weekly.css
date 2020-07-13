@@ -1,0 +1,24 @@
+.week {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.weeklyList {
+  width: 700px;
+  height: 90vh;
+  overflow-y: scroll;
+  width: 70vh;
+  margin-left: 22vw;
+  margin-top: 5vh;
+  flex-wrap: wrap;
+}
+.weeklyList img {
+  padding: 10px;
+}
+
+.list-group-item {
+  overflow-y: scroll;
+}
+.list-group-item img {
+  width: 14vw;
+}

@@ -2,3 +2,15 @@
   font-family: 'Shadows Into Light', cursive !important;
   font-size: 25px;
 }
+
+.listItems {
+  height: 90vh;
+  overflow-y: scroll;
+  width: 70vh;
+  margin-left: 30vw;
+  margin-top: 5vh;
+  background-color: black;
+  color: white;
+  opacity: 0.5;
+  flex-wrap: wrap;
+}
