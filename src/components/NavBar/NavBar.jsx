@@ -12,7 +12,7 @@ const NavBar = () => {
         Sign out
       </button>
 
-      <h1 style={{ fontSize: '15px' }}>
+      <h1 className="header">
         <img src={user.picture.thumbnail} alt="" />
         {user.email}
       </h1>
