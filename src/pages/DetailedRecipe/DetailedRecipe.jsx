@@ -1,17 +1,13 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './DetailedRecipe.css'
+import './DetailedRecipe.css';
 
-class SingleRecipe extends Component {
-  state = { steps: [], ingredients: [] };
+const SingleRecipe = ({ location, history, match }) => {
+  const [steps, changeSteps] = useState([]);
+  const [ingredients, changeIngredients] = useState([]);
 
-  componentDidMount() {
-    this.fetchRecipes();
-  }
-
-  fetchRecipes = async () => {
+  const fetchRecipes = async () => {
     try {
-      const { match } = this.props;
       const { data } = await axios.get(
         `https://api.spoonacular.com/recipes/${match.params.id}/analyzedInstructions?apiKey=95859f3f50c14910a0397cbfcc0d6e9d`,
       );
@@ -23,47 +19,48 @@ class SingleRecipe extends Component {
         },
         { steps: [], ingredients: [] },
       );
-      this.setState({ steps, ingredients });
+      changeSteps(steps);
+      changeIngredients(ingredients);
     } catch (e) {
       console.log('Error fetching Recipes', e);
     }
   };
 
-  handleGoBack = () => {
-    const { location, history } = this.props;
+  useEffect(() => {
+    fetchRecipes();
+  }, []);
+
+  const handleGoBack = () => {
     history.push({
       pathname: '/content/morerandoms',
       state: { from: location.pathname },
     });
   };
 
-  saveRecipe = () => axios.post('https://ironrest.herokuapp.com/saruit', this.state);
+  const saveRecipe = () => axios.post('https://ironrest.herokuapp.com/saruit', this.state);
 
-  render() {
-    const { steps, ingredients } = this.state;
-    return (
-      <div className="listItems recipeInstructions">
-        <button onClick={this.handleGoBack} className="btn btn-warning">
-          Back to my recipes
-        </button>
-        <h1>Directions :</h1>
-        {steps.map(step => (
-          <div key={step}>
-            <p className="recipeInstructions">{step}</p>
-          </div>
+  return (
+    <div className="listItems recipeInstructions">
+      <button onClick={handleGoBack} className="btn btn-warning">
+        Back to my recipes
+      </button>
+      <h1>Directions :</h1>
+      {steps.map((step) => (
+        <div key={step}>
+          <p className="recipeInstructions">{step}</p>
+        </div>
+      ))}
+      <h2>Ingredients</h2>
+      <ul>
+        {ingredients.map(({ name }) => (
+          <li key={name} className="recipeInstructions">
+            {name}
+          </li>
         ))}
-        <h2>Ingredients</h2>
-        <ul>
-          {ingredients.map(({ name }) => (
-            <li key={name} className="recipeInstructions">
-              {name}
-            </li>
-          ))}
-        </ul>
-        <span></span>
-      </div>
-    );
-  }
-}
+      </ul>
+      <span></span>
+    </div>
+  );
+};
 
 export default SingleRecipe;
