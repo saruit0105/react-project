@@ -23,7 +23,7 @@ class MoreRandoms extends Component {
       //We are coming from the homepage
       localStorage.clear();
       const { data } = await axios.get(
-        `https://api.spoonacular.com/recipes/random?number=3&apiKey=${process.env.REACT_APP_SPOON}`,
+        'https://api.spoonacular.com/recipes/random?number=3&apiKey=95859f3f50c14910a0397cbfcc0d6e9d',
       );
       const { recipes } = data;
       this.setState({ randomRecipes: recipes });
@@ -33,31 +33,31 @@ class MoreRandoms extends Component {
     }
   };
 
-  handleRecipeClick = id => () => {
+  handleRecipeClick = (id) => () => {
     const { history } = this.props;
     history.push(`/content/singleRecipe/${id}`);
   };
 
-  handleDeleteClick = id => async () => {
+  handleDeleteClick = (id) => async () => {
     const { data } = await axios.get(
       `https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_SPOON}`,
     );
-    const newRecipes = [...this.state.randomRecipes, ...data.recipes].filter(recipe => recipe.id !== id);
+    const newRecipes = [...this.state.randomRecipes, ...data.recipes].filter((recipe) => recipe.id !== id);
     this.setState({ randomRecipes: newRecipes });
     localStorage.setItem('RANDOM_RECIPES', JSON.stringify(newRecipes));
   };
 
-  handleSaveRecipe = recipe => async () => {
+  handleSaveRecipe = (recipe) => async () => {
     await axios.post('https://ironrest.herokuapp.com/saruit', recipe);
     alert('Saved!');
   };
 
   render() {
     const { randomRecipes } = this.state;
-
+    console.log(randomRecipes);
     return (
       <div className="recipeCards">
-        {randomRecipes.map(eachRecipe => (
+        {randomRecipes.map((eachRecipe) => (
           <div key={eachRecipe.id} className="card">
             <div>
               <img src={eachRecipe.image} alt="food pics" />
@@ -69,7 +69,7 @@ class MoreRandoms extends Component {
                   <p>
                     <strong>Dish type</strong>
                   </p>
-                  {eachRecipe.dishTypes.map(eachType => (
+                  {eachRecipe.dishTypes.map((eachType) => (
                     <li>{eachType}</li>
                   ))}
                 </ul>
@@ -77,7 +77,7 @@ class MoreRandoms extends Component {
                   <p>
                     <strong>Diet type</strong>
                   </p>
-                  {eachRecipe.diets.map(eachDiet => (
+                  {eachRecipe.diets.map((eachDiet) => (
                     <li>{eachDiet}</li>
                   ))}
                 </ul>

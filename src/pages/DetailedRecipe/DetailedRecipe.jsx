@@ -13,7 +13,7 @@ class SingleRecipe extends Component {
     try {
       const { match } = this.props;
       const { data } = await axios.get(
-        `https://api.spoonacular.com/recipes/${match.params.id}/analyzedInstructions?apiKey=${process.env.REACT_APP_SPOON}`,
+        `https://api.spoonacular.com/recipes/${match.params.id}/analyzedInstructions?apiKey=95859f3f50c14910a0397cbfcc0d6e9d`,
       );
       const { steps, ingredients } = data[0].steps.reduce(
         (acc, { step, ingredients }) => {

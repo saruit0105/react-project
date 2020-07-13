@@ -15,7 +15,7 @@ class Search extends Component {
     const { searchTerm } = this.state;
     e.preventDefault();
     const { data } = await axios.get(
-      `https://api.spoonacular.com/recipes/search?query=${searchTerm}&number=5&apiKey=${process.env.REACT_APP_SPOON}`,
+      `https://api.spoonacular.com/recipes/search?query=${searchTerm}&number=5&apiKey=95859f3f50c14910a0397cbfcc0d6e9d`
     );
     this.setState({ searchResults: data.results || [] });
   };
@@ -62,3 +62,6 @@ class Search extends Component {
 }
 
 export default Search;
+
+
+// `https://api.spoonacular.com/recipes/search?query=${searchTerm}&number=5&apiKey=${process.env.REACT_APP_SPOON}`

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { RandomRecipe, MoreRandoms, SingleRecipe, Search, MyWeek } from '.';
+import { MoreRandom, DetailedRecipe, SearchRecipe, Weekly } from '../pages';
 
 const Content = ({ history }) => {
   const handleHomeClick = () => history.push('/');
@@ -11,11 +11,10 @@ const Content = ({ history }) => {
         Go Back
       </button>
       <Switch>
-        <Route path="/content/random" component={RandomRecipe} />
-        <Route path="/content/week" component={MyWeek} />
-        <Route path="/content/moreRandoms" component={MoreRandoms} />
-        <Route path="/content/singleRecipe/:id" component={SingleRecipe} />
-        <Route path="/content/Search" component={Search} />
+        <Route path="/content/week" component={Weekly} />
+        <Route path="/content/moreRandoms" component={MoreRandom} />
+        <Route path="/content/singleRecipe/:id" component={DetailedRecipe} />
+        <Route path="/content/Search" component={SearchRecipe} />
       </Switch>
     </div>
   );
