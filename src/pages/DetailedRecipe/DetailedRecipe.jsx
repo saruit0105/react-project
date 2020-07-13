@@ -37,8 +37,6 @@ const SingleRecipe = ({ location, history, match }) => {
     });
   };
 
-  const saveRecipe = () => axios.post('https://ironrest.herokuapp.com/saruit', this.state);
-
   return (
     <div className="listItems recipeInstructions">
       <button onClick={handleGoBack} className="btn btn-warning">
